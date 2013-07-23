@@ -528,7 +528,7 @@ public:
 class DropVertexBindings
 {
 public:
-    Vertex operator()(const BoundVertex& rhs) {
+    Vertex operator()(BoundVertex rhs) {
         if (!rhs.bindings)
             return rhs.value;
 

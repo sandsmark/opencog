@@ -80,7 +80,7 @@ ForwardChainer::~ForwardChainer()
 
 pHandle ForwardChainer::fwdChainToTarget(int maxRuleApps, meta target)
 {
-    OC_ASSERT(target);
+    OC_ASSERT(target.get());
     // Should usually only be one (or none).
     pHandleSeq results = fwdChain(maxRuleApps, target);
     if (results.empty())
