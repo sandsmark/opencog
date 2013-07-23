@@ -248,10 +248,10 @@ DOMDocument* ActionPlan::createEmbodimentXMLDocument() const throw (opencog::XML
     }
 
     XMLCh tmpStr[PAIUtils::MAX_TAG_LENGTH+1];
-    XMLString::transcode("UTF-8", tmpStr, PAIUtils::MAX_TAG_LENGTH);
-    doc->setEncoding(tmpStr);
-    XMLString::transcode("1.0", tmpStr, PAIUtils::MAX_TAG_LENGTH);
-    doc->setVersion(tmpStr);
+    //XMLString::transcode("UTF-8", tmpStr, PAIUtils::MAX_TAG_LENGTH);
+    //doc->setEncoding(tmpStr);
+    //XMLString::transcode("1.0", tmpStr, PAIUtils::MAX_TAG_LENGTH);
+    //doc->setVersion(tmpStr);
 
     return doc;
 }

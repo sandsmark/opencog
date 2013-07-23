@@ -62,6 +62,8 @@ void EmbodimentDOMParser::error (const unsigned int    errCode,
     XERCES_CPP_NAMESPACE::XMLString::release(&errorTextStr);
     XERCES_CPP_NAMESPACE::XMLString::release(&systemIdStr);
     XERCES_CPP_NAMESPACE::XMLString::release(&publicIdStr);
-    throw new XERCES_CPP_NAMESPACE::DOMException(errCode, errorText);
+    XERCES_CPP_NAMESPACE::DOMException * exception = new XERCES_CPP_NAMESPACE::DOMException(errCode, 0);
+    exception->msg = errorText; //FIXME, errorText might not be valid later
+    throw exception;
 }
 
