@@ -1,3 +1,4 @@
+from __future__ import print_function
 from collections import defaultdict
 
 AtomType = str
@@ -212,7 +213,7 @@ class AtomSpace(object):
     def print_list(self):
         for atom in self:
             if len(atom._in) is 0:
-                print atom
+                print(atom)
 
     def maybe_add(self, atom):
         '''If this atom hasn't been added, add it and return it. Otherwise, return the
@@ -298,15 +299,15 @@ def test():
     n2=Node(t.ConceptNode,'cat')
     assert not n is n2
 
-    print a.get_atoms_by_type(t.ConceptNode)
-    print a.get_atoms_by_type(t.ListLink)
+    print(a.get_atoms_by_type(t.ConceptNode))
+    print(a.get_atoms_by_type(t.ListLink))
 
     a.remove(n)
 
-    print a.get_atoms_by_type(t.ConceptNode)
+    print(a.get_atoms_by_type(t.ConceptNode))
 
     for atom in a:
-        print atom
+        print(atom)
 
 def test_fishgram():
     import sokoban

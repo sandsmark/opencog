@@ -79,14 +79,25 @@ void PythonEval::init(void)
 
     PyRun_SimpleString(
                 "import sys\n"
-                "import StringIO\n"
+                "import io\n"
                 );
 
+    { // Add our own paths
+        const char *path;
+        int i=0;
+        char str[512];
+        while (path = DEFAULT_PYTHON_MODULE_PATHS[i++]){
+            snprintf(str, 512, "sys.path.append(\"%s\")\n", path);
+            PyRun_SimpleString(str);
+        };
+    }
+    PyRun_SimpleString("print(sys.path)\n");
+
     // Define the user function executer
-    PyRun_SimpleString("from opencog.atomspace import Handle, Atom\n"
-                       "import inspect\n"
+    PyRun_SimpleString("from opencog.atomspace import Atom\n");
+    PyRun_SimpleString("import inspect\n"
                        "def execute_user_defined_function(func, handle_uuid):\n"
-                       "    handle = Handle(handle_uuid)\n"
+                       "    handle = Atom.Handle(handle_uuid)\n"
                        "    args_list_link = ATOMSPACE[handle]\n"
                        "    no_of_arguments_in_pattern = len(args_list_link.out)\n"
                        "    no_of_arguments_in_user_fn = len(inspect.getargspec(func).args)\n"
@@ -281,7 +292,7 @@ std::string PythonEval::apply_script(const std::string& script)
     std::string result;
 //    PyObject* pError;
     //    PyGILState_STATE _state = PyGILState_Ensure();
-    PyRun_SimpleString("_opencog_output_stream = StringIO.StringIO()\n"
+    PyRun_SimpleString("_opencog_output_stream = io.StringIO()\n"
                        "_python_output_stream = sys.stdout\n"
                        "sys.stdout = _opencog_output_stream\n"
                        "sys.stderr = _opencog_output_stream\n");
